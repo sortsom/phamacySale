@@ -33,5 +33,6 @@
     <link rel="stylesheet" href="{{ asset('admins/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admins/toastr/toastr.min.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>

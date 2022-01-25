@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -45,6 +46,7 @@ class EmployeesController extends Controller
         $this->validate($request,[
             'name'=>'required|max:20',
             'gender'=>'required',
+            'id_card'=>'required',
         ]);
 
        Employee::create([
@@ -121,12 +123,12 @@ class EmployeesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $employees=Employee::findOrFail($id);
         $employees->Delete();
-        return redirect()->route('admin.employees.index')->with("Success",'You Delete successful!!');
+        return response()->json(['status','Service employee Deleted Successfully']);
     }
 }

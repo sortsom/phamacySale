@@ -48,30 +48,6 @@
 <script src="{{asset('admins/dist/js/demo.js')}}"></script>
 <!--  dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('admins/dist/js/pages/dashboard.js')}}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    $(document).ready(function (){
-        $('#delete').click(function (e) {
-            e.preventDefault();
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Poof! Your imaginary file has been deleted!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Your imaginary file is safe!");
-                    }
-                });
 
-        });
-    });
-</script>
 </body>
 </html>

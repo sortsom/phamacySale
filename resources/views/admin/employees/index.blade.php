@@ -42,6 +42,7 @@
                                     <tbody>
                                     @forelse($employees as $employee)
                                     <tr>
+                                        <input type="hidden" class="delete_val" value="{{$employee->id}}">
                                         <th scope="row">{{$employee->id}}</th>
                                         <td>
                                             @if(!empty(trim($employee->image)))
@@ -61,13 +62,52 @@
                                         <td class="d-flex">
                                             <a class="ml-2 btn btn-outline-dark"data-toggle="modal" data-target="#show-{{$employee->id}}"  href="#"><i class="far fa-eye"></i></a>
                                             <a href="#" data-toggle="modal" data-target="#edit-{{$employee->id}}" class="ml-2 btn btn-outline-primary"><i class="fas fa-edit"></i></a>
-                                            <form method="POST" action="{{route('admin.employees.destroy',$employee->id)}}" class="d-inline-flex" >
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="ml-2 btn btn-outline-danger" id="delete"><i class="far fa-trash-alt"></i></button>
-                                            </form>
+                                            <button type="submit" class="ml-2 btn btn-outline-danger" id="delete"><i class="far fa-trash-alt"></i></button>
+
                                         </td>
                                     </tr>
+
+                                    <script>
+                                        $(document).ready(function (){
+                                            $.ajaxSetup({
+                                                header:{
+                                                    'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                                                }
+                                            });
+                                            $('#delete').click(function (e) {
+                                                e.preventDefault();
+                                                var delete_id = $(this).closest("tr").find('.delete_val').val();
+
+                                                swal({
+                                                    title: "Are you sure?",
+                                                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                    icon: "warning",
+                                                    buttons: true,
+                                                    dangerMode: true,
+                                                })
+                                                    .then((willDelete) => {
+                                                        if (willDelete) {
+                                                            var date={
+                                                                "_token":$('input[name=_token]').val(),
+                                                                "id":delete_id
+                                                            }
+                                                            $.ajax({
+                                                                type: "DELETE",
+                                                                url: "/employee/" + delete_id,
+                                                                date: "data",
+                                                                success: function (response) {
+                                                                    swal("Poof! Your imaginary file has been deleted!", {
+                                                                        icon: "success",
+                                                                    }).then((willDelete) => {
+                                                                        location.reload();
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                            });
+                                        });
+                                    </script>
                                     {{--    edit empoyees--}}
                                     <div class="modal fade" id="edit-{{$employee->id}}" tabindex="-1" role="dialog" aria-labelledby="employeeId" aria-hidden="true">
                                         <div class="modal-dialog modal-xl" role="document">
