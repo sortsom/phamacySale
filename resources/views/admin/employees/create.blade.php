@@ -29,25 +29,34 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">ឈ្មោះរបស់បុគ្គលិក</label>
-                                                <input type="text" name="name" class="form-control" id="name" placeholder="ឈ្មោះបុគ្គលិក">
+                                                <input type="text" name="name" class="form-control is-invalid" id="name" aria-describedby="name1"  placeholder="ឈ្មោះបុគ្គលិក" required>
+                                                @error('name')
+                                                    <p class="text-danger invalid-feedback" id="name1" >{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender">ភេទ</label>
-                                                <select id="inputState" name="gender" class="form-control">
+                                                <select id="inputState" name="gender" class="form-control is-invalid">
                                                     <option selected>ជ្រើសរើសភេទ</option>
                                                     <option value="1">ប្រុស</option>
                                                     <option value="2">ស្រី</option>
                                                 </select>
+                                                @error('gander')
+                                                <p class="text-danger invalid-feedback" >{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="name">លេខកូដ</label>
-                                                <input type="text" name="id_card" class="form-control" id="name" placeholder="លេខសម្គាល់បុគ្គលិក">
+                                                <label for="id_card">លេខកូដ</label>
+                                                <input type="text" name="id_card" class="form-control is-invalid" id="id_card" placeholder="លេខសម្គាល់បុគ្គលិក">
+                                                @error('id_card')
+                                                <p class="text-danger invalid-feedback">{{$message}}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
